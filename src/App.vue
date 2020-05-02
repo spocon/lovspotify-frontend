@@ -14,6 +14,7 @@
     import SpotifyHeader from './components/SpotifyMain/MainHeader.vue'
     import SpotifyMain from './components/SpotifyMain/MainMiddle.vue'
 
+
     const axios = require('axios').default;
     export default {
         name: 'App',
@@ -28,7 +29,7 @@
         },
         methods: {
             getCurrentSong: function () {
-                axios.get('http://192.168.8.154:8080/player/current').then(response => {
+                axios.get('http://localhost:8081/player/current').then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                     this.spotify = response.data
                 }).catch(err =>  {
