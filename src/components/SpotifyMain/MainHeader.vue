@@ -47,7 +47,9 @@
                     <div class="col-auto">
                         <img :src="require('@/assets/lovspotify_100x100.png')" alt=""/>
                     </div>
-                    <div>Have fun !</div>
+                    <div class="col-auto">
+                        Have fun !
+                    </div>
                 </div>
             </div>
         </b-modal>
