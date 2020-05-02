@@ -1,10 +1,11 @@
 <template>
     <div class="MainMiddle">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-1 col-lg">
-                    <div class="container">
-                        <div class="row">
+                <div class="col-md-2 "></div>
+                <div class="col-md-5 ">
+                    <div class="container pl-xl-5" >
+                        <div class="row ">
                             <div class="col-auto pb-lg-5">
                                 <font-awesome-icon icon="music" inverse size="2x"></font-awesome-icon>
                             </div>
@@ -23,9 +24,10 @@
                             </div>
                     </div>
                 </div>
-                <div class="col-1 col-lg">
+                <div class="col-md-3">
                     <input type="image" :src="'https://i.scdn.co/image/'+spotify.image.key" alt=""/>
                 </div>
+                <div class="col-md-2"></div>
             </div>
         </div>
 
