@@ -7,12 +7,28 @@
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
                 <b-nav-item-dropdown text="Settings" right>
-                    <b-dropdown-item v-b-modal.modal-settings v-on:click="getConfig" href="#">Change Settings
-                    </b-dropdown-item>
+                    <b-dropdown-item v-b-modal.modal-themes  href="#">Themes</b-dropdown-item>
+                    <b-dropdown-item v-b-modal.modal-settings v-on:click="getConfig" href="#">Device</b-dropdown-item>
                     <b-dropdown-item v-b-modal.modal-about href="#">About</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
         </b-navbar>
+        <b-modal id="modal-themes" title="Select a theme">
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto">
+                        <img :src="require('@/assets/lovspotify_100x100.png')" alt=""/>
+                    </div>
+                    <div class="col-auto">
+                        <select style="min-width: 300px;max-width:300px;"> v-model="themes">
+                            <option  v-for="theme in themes" v-bind:key="theme" v-bind:value="theme">
+                                {{ theme }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </b-modal>
         <b-modal id="modal-settings" title="Local Settings">
             <div class="container">
                 <div class="row">
@@ -91,7 +107,8 @@
             return {
                 show: true,
                 configdata: [],
-                selectedMixer: ''
+                selectedMixer: '',
+                themes: ['Default']
             }
         },
         methods: {
