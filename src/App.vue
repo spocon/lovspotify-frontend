@@ -33,7 +33,7 @@
         },
         methods: {
             getCurrentSong: function () {
-                axios.get('http://localhost:8081/player/current').then(response => {
+                axios.get('http://localhost:8080/player/current').then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                     this.spotify = response.data
                     this.connected = true

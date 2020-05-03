@@ -119,7 +119,7 @@
                 }
             },
             getConfig() {
-                axios.get('http://localhost:8081/config/data').then(response => {
+                axios.get('http://localhost:8080/config/data').then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                     this.configdata = response.data
                 }).catch(err => {
