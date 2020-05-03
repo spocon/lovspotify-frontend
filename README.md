@@ -1,5 +1,5 @@
 # lovspotify-frontend
-Collection of views for the frontend of lovspotify
+Collection of themes for lovspotify
 
 # How to build project
 
