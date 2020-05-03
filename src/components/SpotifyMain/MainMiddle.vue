@@ -80,7 +80,6 @@
         }
     }
 
-
     function GetTime(time, duration) {
         return time.toHHMMSS() + " / " + duration.toHHMMSS();
     }

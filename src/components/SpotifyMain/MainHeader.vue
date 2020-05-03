@@ -7,7 +7,7 @@
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
                 <b-nav-item-dropdown text="Settings" right>
-                    <b-dropdown-item v-b-modal.modal-themes  href="#">Themes</b-dropdown-item>
+                    <b-dropdown-item v-b-modal.modal-themes href="#">Themes</b-dropdown-item>
                     <b-dropdown-item v-b-modal.modal-settings v-on:click="getConfig" href="#">Device</b-dropdown-item>
                     <b-dropdown-item v-b-modal.modal-about href="#">About</b-dropdown-item>
                 </b-nav-item-dropdown>
@@ -20,8 +20,8 @@
                         <img :src="require('@/assets/lovspotify_100x100.png')" alt=""/>
                     </div>
                     <div class="col-auto">
-                        <select style="min-width: 300px;max-width:300px;"> v-model="themes">
-                            <option  v-for="theme in themes" v-bind:key="theme" v-bind:value="theme">
+                        <select style="background: lavender;min-width: 300px;max-width:300px;"> v-model="themes">
+                            <option v-for="theme in themes" v-bind:key="theme" v-bind:value="theme">
                                 {{ theme }}
                             </option>
                         </select>
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </b-modal>
-        <b-modal id="modal-settings" title="Local Settings">
+        <b-modal id="modal-settings" @ok="setConfig" ok-title="Restart" title="Local Settings">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -44,7 +44,8 @@
                         Device-Name:
                     </div>
                     <div class="col-md-4">
-                        {{configdata.deviceName}}
+                        <input type="text" name="deviceName" placeholder="Device Name" v-model="configdata.deviceName"
+                               style="background: lavender;border: none;"/>
                     </div>
                 </div>
                 <div class="row">
@@ -68,8 +69,8 @@
                         Mixers:
                     </div>
                     <div class="col-md-4">
-                        <select style="max-width:300px;"> v-model="selectedMixer">
-                            <option  v-for="mixer in configdata.mixers" v-bind:key="mixer" v-bind:value="mixer">
+                        <select v-model="configdata.chosenMixer" style="background: lavender;max-width:300px;">
+                            <option v-for="mixer in configdata.availableMixers" v-bind:key="mixer" v-bind:value="mixer">
                                 {{ mixer }}
                             </option>
                         </select>
@@ -81,10 +82,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-auto">
-                        <img :src="require('@/assets/lovspotify_100x100.png')" alt=""/>
-                    </div>
-                    <div class="col-auto">
-                        Have fun !
+                        <a href="https://github.com/spocon/lovspotify" target="_blank"><img :src="require('@/assets/github_100x100.png')"  alt=""/> Spocon (Spotify Connect Client)</a>
+
                     </div>
                 </div>
             </div>
@@ -108,7 +107,11 @@
                 show: true,
                 configdata: [],
                 selectedMixer: '',
-                themes: ['Default']
+                themes: ['Default'],
+                settings: {
+                    deviceName: '',
+                    mixer: ''
+                }
             }
         },
         methods: {
@@ -127,7 +130,18 @@
                         console.log("Not connected")
                     }
                 })
+            },
+            setConfig() {
+                axios.post('http://localhost:8080/config/data',this.configdata)
+                    .then(response => {
+                    console.debug("test" + JSON.stringify(response.data))
+                }).catch(err => {
+                    if (err.response.status === 404) {
+                        console.log("Not connected")
+                    }
+                })
             }
+
         }
     }
 </script>
