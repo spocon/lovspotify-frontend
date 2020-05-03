@@ -7,36 +7,56 @@
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
                 <b-nav-item-dropdown text="Settings" right>
-                    <b-dropdown-item v-b-modal.modal-settings v-on:click="getConfig" href="#">Change Settings</b-dropdown-item>
+                    <b-dropdown-item v-b-modal.modal-settings v-on:click="getConfig" href="#">Change Settings
+                    </b-dropdown-item>
                     <b-dropdown-item v-b-modal.modal-about href="#">About</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
         </b-navbar>
         <b-modal id="modal-settings" title="Local Settings">
-            <div>Settings are stored in <code>/opt/lovspotify/config.toml</code></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-auto">
+                    <div class="col-md-4">
+                        Config-File:
+                    </div>
+                    <div class="col-md-8">
+                        <code>/opt/lovspotify/config.toml</code>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
                         Device-Name:
                     </div>
-                    <div class="col-auto">
+                    <div class="col-md-4">
                         {{configdata.deviceName}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-auto">
+                    <div class="col-md-4">
                         Device-Type:
                     </div>
-                    <div class="col-auto">
+                    <div class="col-md-4">
                         {{configdata.deviceType}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-auto">
+                    <div class="col-md-4">
                         Device-Host:
                     </div>
-                    <div class="col-auto">
+                    <div class="col-md-4">
                         {{configdata.url}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Mixers:
+                    </div>
+                    <div class="col-md-4">
+                        <select style="max-width:300px;"> v-model="selectedMixer">
+                            <option  v-for="mixer in configdata.mixers" v-bind:key="mixer" v-bind:value="mixer">
+                                {{ mixer }}
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -70,7 +90,8 @@
         data() {
             return {
                 show: true,
-                configdata: []
+                configdata: [],
+                selectedMixer: ''
             }
         },
         methods: {

@@ -1,8 +1,8 @@
 <template>
     <div id="app">
         <SpotifyHeader class="pb-5"/>
-        <SpotifyMain class="pb-5" v-bind:spotify="spotify"/>
-        <input type="image" src="assets/lovspotify_100x100.png" alt=""/>
+        <SpotifyMain v-show="connected" class="pb-5" v-bind:spotify="spotify"/>
+        <div v-show="!connected">Not Connected</div>
     </div>
 
 
@@ -22,9 +22,13 @@
             SpotifyHeader,
             SpotifyMain
         },
+        meta: {
+            title: "Lovspotify"
+        },
         data: function () {
             return {
-                spotify: []
+                spotify: [],
+                connected: Boolean
             }
         },
         methods: {
@@ -32,11 +36,15 @@
                 axios.get('http://localhost:8081/player/current').then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                     this.spotify = response.data
+                    this.connected = true
                 }).catch(err =>  {
                     if(err.response.status === 404 ) {
                         console.log("Not connected")
+
                     }
+                    this.connected = false
                 })
+
 
             }
         },
