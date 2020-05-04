@@ -31,8 +31,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="col-md-3">
                     <input type="image" :src="'https://i.scdn.co/image/'+spotify.image.key" alt=""/>
@@ -40,12 +38,15 @@
                 <div class="col-md-2"></div>
             </div>
         </div>
-
+        <div class="percentBar">
+            <div id="percent" v-bind:style="{ width: songPercent + '%' }"></div>
+        </div>
     </div>
 </template>
 
 
 <script>
+
     export default {
         name: 'MainMiddle',
         props: {
@@ -61,21 +62,21 @@
             }
         },
         watch: {
-            spotify: function() {
+            spotify: function () {
                 this.getCurrentTime()
             }
         },
-        data: function() {
+        data: function () {
             return {
-                time: {
-                    type: String
-                }
+                time: String,
+                songPercent: Number
             }
 
         },
         methods: {
             getCurrentTime() {
-             this.time =   GetTime(this.spotify.trackTime, this.spotify.track.duration)
+                this.songPercent = (this.spotify.trackTime / this.spotify.track.duration) * 100;
+                this.time = GetTime(this.spotify.trackTime, this.spotify.track.duration)
             }
         }
     }
@@ -104,3 +105,19 @@
     }
 
 </script>
+
+<style>
+    .percentBar {
+        position: absolute;
+        height: 10px;
+        bottom: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: hsla(0, 0%, 15%, 0.8);
+    }
+    #percent {
+        position: relative;
+        height: 100%;
+        background-color: hsla(0, 0%, 85%, 0.8);
+    }
+</style>

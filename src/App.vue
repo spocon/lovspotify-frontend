@@ -2,7 +2,8 @@
     <div id="app">
         <SpotifyHeader class="pb-5"/>
         <SpotifyMain v-show="connected" class="pb-5" v-bind:spotify="spotify"/>
-        <div v-show="!connected">Not Connected</div>
+        <SpotifyDisconnected v-show="!connected"/>
+
     </div>
 
 
@@ -13,17 +14,19 @@
     import "bootstrap-vue/dist/bootstrap-vue.css"
     import SpotifyHeader from './components/SpotifyMain/MainHeader.vue'
     import SpotifyMain from './components/SpotifyMain/MainMiddle.vue'
+    import SpotifyDisconnected from './components/SpotifyMain/MainDisconnected.vue'
 
 
     const axios = require('axios').default;
     export default {
         name: 'App',
+        title() {
+          return "Lovspotify"
+        },
         components: {
             SpotifyHeader,
-            SpotifyMain
-        },
-        meta: {
-            title: "Lovspotify"
+            SpotifyMain,
+            SpotifyDisconnected
         },
         data: function () {
             return {
@@ -32,23 +35,29 @@
             }
         },
         methods: {
-            getCurrentSong: function () {
-                axios.get('http://localhost:8080/player/current').then(response => {
+            getCurrentSong() {
+                axios.get('/player/current').then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                     this.spotify = response.data
                     this.connected = true
-                }).catch(err =>  {
-                    if(err.response.status === 404 ) {
+                }).catch(err => {
+                    if (err.response.status === 404) {
                         console.log("Not connected")
 
                     }
                     this.connected = false
                 })
-
-
+            },
+            getTitle(vm) {
+                const {title} = vm.$options
+                if (title) {
+                    return typeof title === 'function' ? title.call(vm) : title
+                }
             }
         },
         created() {
+            const title = this.getTitle(this)
+            if (title) document.title = title
             this.getCurrentSong()
             setInterval(function () {
                 this.getCurrentSong();

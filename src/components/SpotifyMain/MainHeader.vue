@@ -107,22 +107,12 @@
                 show: true,
                 configdata: [],
                 selectedMixer: '',
-                themes: ['Default'],
-                settings: {
-                    deviceName: '',
-                    mixer: ''
-                }
+                themes: ['Default']
             }
         },
         methods: {
-            toggleNavbar() {
-                this.show = !this.show;
-                if (this.show) {
-                    this.getConfig();
-                }
-            },
             getConfig() {
-                axios.get('http://localhost:8080/config/data').then(response => {
+                axios.get('/config/data').then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                     this.configdata = response.data
                 }).catch(err => {
@@ -132,7 +122,7 @@
                 })
             },
             setConfig() {
-                axios.post('http://localhost:8080/config/data',this.configdata)
+                axios.post('/config/data',this.configdata)
                     .then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                 }).catch(err => {
