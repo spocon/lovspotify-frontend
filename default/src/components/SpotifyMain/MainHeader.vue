@@ -1,6 +1,6 @@
 <template>
-    <div class="main-header">
-        <b-navbar type="dark" variant="dark">
+    <div class="main-header" >
+        <b-navbar class="vw-100" type="dark" variant="dark">
             <b-navbar-nav>
                 <b-navbar-brand href="#"><img :src="require('@/assets/lovspotify_50x50.png')" class="pr-3" alt=""/>Lovspotify
                 </b-navbar-brand>
@@ -113,21 +113,22 @@
         methods: {
             getConfig() {
                 axios.get('/config/data').then(response => {
-                    console.debug("test" + JSON.stringify(response.data))
+                    //console.debug("test" + JSON.stringify(response.data))
                     this.configdata = response.data
                 }).catch(err => {
                     if (err.response.status === 404) {
-                        console.log("Not connected")
+                       // console.debug("Not connected")
                     }
                 })
             },
             setConfig() {
                 axios.post('/config/data',this.configdata)
-                    .then(response => {
+                    /*.then(response => {
                     console.debug("test" + JSON.stringify(response.data))
-                }).catch(err => {
+                })*/
+                    .catch(err => {
                     if (err.response.status === 404) {
-                        console.log("Not connected")
+                        //console.debug("Not connected")
                     }
                 })
             }

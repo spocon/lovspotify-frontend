@@ -3,10 +3,10 @@
   "version": "0.7.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 8081",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "buildzip": " vue-cli-service build & mkdirp ./out/ & npm-build-zip --source=./dist --destination=./out/"
+    "buildzip": "vue-cli-service build & mkdirp ../out/ & npm-build-zip --source=./dist --destination=../out/default"
   },
   "dependencies": {
     "core-js": "^3.6.4",
