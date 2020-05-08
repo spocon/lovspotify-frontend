@@ -1,5 +1,5 @@
 <template>
-    <div class="main-header" >
+    <div class="main-header">
         <b-navbar class="vw-100" type="dark" variant="dark">
             <b-navbar-nav>
                 <b-navbar-brand href="#"><img :src="require('@/assets/lovspotify_50x50.png')" class="pr-3" alt=""/>Lovspotify
@@ -15,7 +15,7 @@
         </b-navbar>
         <b-modal id="modal-themes" title="Select a theme">
             <div class="container">
-                <div class="row">
+                <div class="row pb-1">
                     <div class="col-auto">
                         <img :src="require('@/assets/lovspotify_100x100.png')" alt=""/>
                     </div>
@@ -31,47 +31,63 @@
         </b-modal>
         <b-modal id="modal-settings" @ok="setConfig" ok-title="Restart" title="Local Settings">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
+                <div class="row pb-1">
+                    <div class="col-md-4 " style="red">
                         Config-File:
                     </div>
                     <div class="col-md-8">
                         <code>/opt/lovspotify/config.toml</code>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row ">
+                    <div class="col-md-4">
+                        Device-Host:
+                    </div>
+                    <div class="col-md-7">
+                        <code>{{configdata.url}}</code>
+                    </div>
+                </div>
+                <div class="row pb-1">
                     <div class="col-md-4">
                         Device-Name:
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="deviceName" placeholder="Device Name" v-model="configdata.deviceName"
-                               style="background: lavender;border: none;"/>
+                        <input type="text" name="deviceName" placeholder="Device Name" v-model="configdata.deviceName"/>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pb-1">
                     <div class="col-md-4">
                         Device-Type:
                     </div>
                     <div class="col-md-4">
-                        {{configdata.deviceType}}
+                        <select v-model="configdata.deviceType" >
+                            <option v-for="deviceType in configdata.availableDeviceTypes" v-bind:key="deviceType" v-bind:value="deviceType">
+                                {{ deviceType }}
+                            </option>
+                        </select>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        Device-Host:
-                    </div>
-                    <div class="col-md-4">
-                        {{configdata.url}}
-                    </div>
-                </div>
-                <div class="row">
+                <div class="row pb-1">
                     <div class="col-md-4">
                         Mixers:
                     </div>
                     <div class="col-md-4">
-                        <select v-model="configdata.chosenMixer" style="background: lavender;max-width:300px;">
+                        <select v-model="configdata.chosenMixer" >
                             <option v-for="mixer in configdata.availableMixers" v-bind:key="mixer" v-bind:value="mixer">
                                 {{ mixer }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="col-md-4">
+                        LogLevel:
+                    </div>
+                    <div class="col-md-4">
+                        <select v-model="configdata.logLevel" class="mdb-select" >
+                            <option v-for="loglevel in configdata.availableLogLevels" v-bind:key="loglevel"
+                                    v-bind:value="loglevel">
+                                {{ loglevel }}
                             </option>
                         </select>
                     </div>
@@ -80,9 +96,11 @@
         </b-modal>
         <b-modal id="modal-about" title="About Lovspotify">
             <div class="container">
-                <div class="row">
+                <div class="row pb-1">
                     <div class="col-auto">
-                        <a href="https://github.com/spocon/lovspotify" target="_blank"><img :src="require('@/assets/github_100x100.png')"  alt=""/> Spocon (Spotify Connect Client)</a>
+                        <a href="https://github.com/spocon/lovspotify" target="_blank"><img
+                                :src="require('@/assets/github_100x100.png')" alt=""/> Spocon (Spotify Connect
+                            Client)</a>
 
                     </div>
                 </div>
@@ -117,20 +135,20 @@
                     this.configdata = response.data
                 }).catch(err => {
                     if (err.response.status === 404) {
-                       // console.debug("Not connected")
+                        // console.debug("Not connected")
                     }
                 })
             },
             setConfig() {
-                axios.post('/config/data',this.configdata)
+                axios.post('/config/data', this.configdata)
                     /*.then(response => {
                     console.debug("test" + JSON.stringify(response.data))
                 })*/
                     .catch(err => {
-                    if (err.response.status === 404) {
-                        //console.debug("Not connected")
-                    }
-                })
+                        if (err.response.status === 404) {
+                            //console.debug("Not connected")
+                        }
+                    })
             }
 
         }
@@ -140,6 +158,16 @@
 <style scoped>
     .main-header {
         font-size: large;
+    }
+    select {
+        max-width: 250px;
+        width:250px;
+        background-color: aliceblue;
+    }
+    input {
+        max-width: 250px;
+        width: 250px;
+        background-color: aliceblue;
     }
 
 </style>

@@ -36,9 +36,9 @@
                 <input type="image" :src="'https://i.scdn.co/image/'+spotify.image.key" alt=""/>
             </div>
         </div>
-        <div class="row pt-5">
-            <div class=" col-2"/>
-            <div class="col-md-8 controller p-4">
+        <div class="row pt-3">
+            <div class=" col-md-2"/>
+            <div class="col-md-8 controller p-1">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-1"></div>
@@ -65,7 +65,6 @@
                             <font-awesome-icon class="cursor-pointer" icon="greater-than" inverse
                                                size="2x"></font-awesome-icon>
                         </div>
-                        <div class="col-1"/>
                     </div>
                 </div>
             </div>

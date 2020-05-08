@@ -1,8 +1,8 @@
 <template>
     <div id="app" >
-        <div v-show="connected" class="container-fluid flex-column vh-100 overflow-hidden">
+        <div v-show="connected" class="container-fluid flex-column vh-100 ">
             <SpotifyHeader class="row h-auto"/>
-            <div class="row vh-100 flex-fill d-flex justify-content-start " >
+            <div class="row flex-fill d-flex justify-content-start " >
                 <SpotifyMain class="col-10 pt-xl-5" v-bind:time="time" v-bind:spotify="spotify"/>
             </div>
         </div>
@@ -103,11 +103,11 @@
         -moz-osx-font-smoothing: grayscale;
         font-size: xx-large;
         text-align: center;
+        color: hsla(0, 0%, 100%, 0.7);
     }
 
     html, body {
         background: rgba(52, 52, 50, 1);
-        color: hsla(0, 0%, 100%, 0.7);
         max-height: 100%;
         height: 100%;
         padding: 0;
