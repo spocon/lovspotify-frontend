@@ -1,12 +1,12 @@
 {
   "name": "lovspotify",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 8081",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "buildzip": "vue-cli-service build & mkdirp ../out/ & npm-build-zip --source=./dist --destination=../out/default"
+    "buildzip": "vue-cli-service build & mkdirp ../out/& npm-build-zip --source=./dist --destination=../out"
   },
   "dependencies": {
     "core-js": "^3.6.4",

@@ -49,6 +49,14 @@
                 </div>
                 <div class="row pb-1">
                     <div class="col-md-4">
+                        Server-Port:
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="serverPort" placeholder="8080" v-model="configdata.serverPort"/>
+                    </div>
+                </div>
+                <div class="row pb-1">
+                    <div class="col-md-4">
                         Device-Name:
                     </div>
                     <div class="col-md-4">
