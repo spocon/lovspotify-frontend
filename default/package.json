@@ -22,7 +22,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
+    "@vue/cli-service": "~5.0.8",
     "npm-build-zip": "^1.0.2",
     "mkdirp": "^1.0.4",
     "babel-eslint": "^10.1.0",
